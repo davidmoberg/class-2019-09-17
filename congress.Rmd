@@ -11,6 +11,7 @@ library(fivethirtyeight)
 library(tidyverse)
 library(ggplot2)
 library(knitr)
+library(ggthemes)
 ```
 
 ```{r}
@@ -18,6 +19,6 @@ congress_age%>%mutate(year = format(termstart, "%Y"))%>%
   filter(party %in% c("R", "D"))%>%
   group_by(year, party) %>%
   summarize(avg = mean(age))%>%
-  ggplot(aes(x = year, y = avg, group = party, color = party))+geom_line()+labs(x = "year", y = "average age", title = "Average Age of Members of Congress") + xlim(1950, 2013)
+  ggplot(aes(x = year, y = avg, group = party, color = party))+geom_line()+labs(x = "year", y = "average age", title = "Average Age of Members of Congress", subtitle = "At the start of term, 1947-2013", source = "538 R Package")+theme_fivethirtyeight()+scale_color_fivethirtyeight()
 ```
 
